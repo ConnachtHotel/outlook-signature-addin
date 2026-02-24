@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+           xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
+           xsi:type="MailApp">
+<Id>dff50eba-eccd-49cb-b533-49817e2f07da</Id>
+<Version>1.0.0.0</Version>
+<ProviderName>Connacht Hospitality Group</ProviderName>
+<DefaultLocale>en-US</DefaultLocale>
+<DisplayName DefaultValue="Connacht Signatures"/>
+<Description DefaultValue="Automatically sets email signatures for Connacht Hospitality Group employees."/>
+<IconUrl DefaultValue="https://NDuggan05.github.io/outlook-signature-addin/assets/icon-64.png"/>
+<HighResolutionIconUrl DefaultValue="https://NDuggan05.github.io/outlook-signature-addin/assets/icon-128.png"/>
+<SupportUrl DefaultValue="https://www.connachthospitalitygroup.ie"/>
+
+<AppDomains>
+    <AppDomain>https://NDuggan05.github.io</AppDomain>
+  </AppDomains>
+
+  <Hosts>
+    <Host Name="Mailbox"/>
+  </Hosts>
+
+  <Requirements>
+    <Sets>
+      <Set Name="Mailbox" MinVersion="1.10"/>
+    </Sets>
+  </Requirements>
+
+  <FormSettings>
+    <Form xsi:type="ItemRead">
+      <DesktopSettings>
+        <SourceLocation DefaultValue="https://NDuggan05.github.io/outlook-signature-addin/src/autorun.html"/>
+        <RequestedHeight>250</RequestedHeight>
+      </DesktopSettings>
+    </Form>
+  </FormSettings>
+
+  <Permissions>ReadWriteItem</Permissions>
+
+  <Rule xsi:type="RuleCollection" Mode="Or">
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read"/>
+  </Rule>
+
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1" xsi:type="VersionOverridesV1_1">
+      <Requirements>
+        <bt:Sets DefaultMinVersion="1.10">
+          <bt:Set Name="Mailbox"/>
+        </bt:Sets>
+      </Requirements>
+
+      <Hosts>
+        <Host xsi:type="MailHost">
+          <Runtimes>
+            <Runtime resid="WebViewRuntime.Url">
+              <Override type="javascript" resid="JSRuntime.Url"/>
+            </Runtime>
+          </Runtimes>
+
+          <DesktopFormFactor>
+            <FunctionFile resid="WebViewRuntime.Url"/>
+
+            <ExtensionPoint xsi:type="LaunchEvent">
+              <LaunchEvents>
+                <LaunchEvent Type="OnNewMessageCompose" FunctionName="onNewMessageCompose"/>
+              </LaunchEvents>
+              <SourceLocation resid="WebViewRuntime.Url"/>
+            </ExtensionPoint>
+          </DesktopFormFactor>
+        </Host>
+      </Hosts>
+
+      <Resources>
+        <bt:Images>
+          <bt:Image id="Icon.16x16" DefaultValue="https://NDuggan05.github.io/outlook-signature-addin/assets/icon-16.png"/>
+          <bt:Image id="Icon.32x32" DefaultValue="https://NDuggan05.github.io/outlook-signature-addin/assets/icon-32.png"/>
+          <bt:Image id="Icon.80x80" DefaultValue="https://NDuggan05.github.io/outlook-signature-addin/assets/icon-80.png"/>
+        </bt:Images>
+        <bt:Urls>
+          <bt:Url id="WebViewRuntime.Url" DefaultValue="https://NDuggan05.github.io/outlook-signature-addin/src/autorun.html"/>
+          <bt:Url id="JSRuntime.Url" DefaultValue="https://NDuggan05.github.io/outlook-signature-addin/src/autorun.js"/>
+        </bt:Urls>
+        <bt:ShortStrings>
+          <bt:String id="GroupLabel" DefaultValue="Connacht Signatures"/>
+        </bt:ShortStrings>
+        <bt:LongStrings/>
+      </Resources>
+
+      </VersionOverrides>
+  </VersionOverrides>
+</OfficeApp>
