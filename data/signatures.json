@@ -4,20 +4,23 @@
     "title": "IT Intern",
     "phone": "+353861553495",
     "website": "www.chgl.ie",
-    "address": "Connacht Hotel, Old Dublin Rd, Galway, H91 K5DD"
+    "address": "Connacht Hotel, Old Dublin Rd, Galway, H91 K5DD",
+    "banner": "newLogo.gif"
   },
   "G00435980@atu.ie": {
     "name": "Nathan Duggan",
     "title": "IT Intern",
     "phone": "+353 12 345 0000",
     "website": "www.chgl.ie",
-    "address": "Connacht Hotel, Old Dublin Rd, Galway, H91 K5DD"
+    "address": "Connacht Hotel, Old Dublin Rd, Galway, H91 K5DD",
+    "banner": "logo.gif"
   },
   "arooney@chgl.ie": {
     "name": "Alan Rooney",
     "title": "IT Manager",
     "phone": "+353 12 345 0000",
     "website": "www.chgl.ie",
-    "address": "Connacht Hotel, Old Dublin Rd, Galway, H91 K5DD"
+    "address": "Connacht Hotel, Old Dublin Rd, Galway, H91 K5DD",
+    "banner": "logo.gif"
   }
 }

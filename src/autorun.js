@@ -98,7 +98,7 @@ function buildSignatureHtml(emp) {
     + '<tr>'
     + '<td>'
     + '<a href="' + WEBSITE_URL + '" target="_blank" style="text-decoration:none;">'
-    + '<img src="' + LOGO_URL + '" alt="Connacht Hospitality Group" width="500" style="border:0;display:block;" />'
+    + '<img src="https://NDuggan05.github.io/outlook-signature-addin/assets/' + emp.banner + '" alt="Connacht Hospitality Group" width="500" style="border:0;display:block;" />'
     + '</a>'
     + '</td>'
     + '</tr>'
@@ -108,7 +108,7 @@ function buildSignatureHtml(emp) {
     + '<table cellpadding="0" cellspacing="0" border="0" style="padding-top:15px;">'
     + '<tr>'
     + '<td style="font-size:10px;color:#999999;line-height:1.4;">'
-    + '<strong>Disclaimer:</strong><br/><br/>'
+    + '<strong>Disclaimer:</strong><br/><br/>'//Disclaimer title, every plus after this one is a sentence with <br></br> for paragraph spaces
     + 'This email and any attachments may be confidential and intended only for the named recipient. '
     + 'If you receive this email or any attachment(s) in error, please contact the sender by return email and delete it. Thank you.<br/><br/>'
     + 'The sender respects your right to disconnect and does not expect a response outside of your normal working hours unless urgent or pre-agreed.'
