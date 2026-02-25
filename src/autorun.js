@@ -166,3 +166,6 @@ async function onNewMessageCompose(event) {
   }
 }
 
+//registers with office
+Office.actions.associate("OnNewMessageCompose", onNewMessageCompose); //associate the event handler with the OnNewMessageCompose event so it runs automatically when a new email is composed
+
