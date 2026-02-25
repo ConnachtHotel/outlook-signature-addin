@@ -1,3 +1,5 @@
+Office.onReady(function() { //waits for office to be ready before running the code, which is important for accessing the Office APIs
+
 var DATA_URL = "https://NDuggan05.github.io/outlook-signature-addin/data/signatures.json";
 var LOGO_URL = "https://NDuggan05.github.io/outlook-signature-addin/assets/logo.gif";
 var WEBSITE_URL = "https://www.connachthospitalitygroup.ie/";
@@ -168,4 +170,4 @@ async function onNewMessageCompose(event) {
 
 //registers with office
 Office.actions.associate("onNewMessageCompose", onNewMessageCompose); //associate the event handler with the OnNewMessageCompose event so it runs automatically when a new email is composed
-
+}); //end of Office.onReady()
