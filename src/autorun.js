@@ -75,8 +75,8 @@ function buildSignatureHtml(emp) {
 
     // Left column: Logo
     + '<td style="padding-right:15px;vertical-align:top;border-right:2px solid #1a3c34;">'
-    + '<a href="' + WEBSITE_URL + '" target="_blank" style="text-decoration:none;">'
-    + '<img src="' + LOGO_URL + '" alt="Connacht Hospitality Group" width="150" style="border:0;display:block;" />'
+    + '<a href="' + "https://www.connachthospitalitygroup.ie/" + '" target="_blank" style="text-decoration:none;">'
+    + '<img src="' + "blob:https://outlook.cloud.microsoft/9665cbcc-3711-4a7b-bc80-cac314bdf584" + '" alt="Connacht Hospitality Group" width="150" style="border:0;display:block;" />'
     + '</a>'
     + '</td>'
 
