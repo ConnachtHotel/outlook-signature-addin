@@ -78,16 +78,16 @@ function buildSignatureHtml(emp) {
 
     // Left: Name & Title
     + '<td style="padding-right:20px;vertical-align:top;">'
-    + '<strong style="font-size:14px;color:#000000;">' + emp.name + '</strong><br/>'
-    + '<span style="font-size:12px;color:#666666;">' + emp.title + '</span>'
+    + (emp.name ? '<strong style="font-size:14px;color:#000000;">' + emp.name + '</strong><br/>' : '')
+    + (emp.title ? '<span style="font-size:12px;color:#666666;">' + emp.title + '</span>' : '')
     + '</td>'
 
     // Right: Contact Details
     + '<td style="padding-left:20px;vertical-align:top;border-left:1px solid #cccccc;">'
-    + '<span style="padding-left:10px;"><strong>E:</strong> <a href="mailto:' + emp.email + '" style="color:#333333;text-decoration:underline;">' + emp.email + '</a></span><br/>'
-    + '<span style="padding-left:10px;"><strong>T:</strong> <a href="tel:' + emp.phone + '" style="color:#333333;text-decoration:underline;">' + emp.phone + '</a></span><br/>'
-    + '<span style="padding-left:10px;"><strong>W:</strong> <a href="https://' + emp.website + '" target="_blank" style="color:#333333;text-decoration:underline;">' + emp.website + '</a></span><br/>'
-    + '<span style="padding-left:10px;"><strong>A:</strong> ' + emp.address + '</span>'
+    + (emp.email ? '<span style="padding-left:10px;"><strong>E:</strong> <a href="mailto:' + emp.email + '" style="color:#333333;text-decoration:underline;">' + emp.email + '</a></span><br/>' : '')
+    + (emp.phone ? '<span style="padding-left:10px;"><strong>T:</strong> <a href="tel:' + emp.phone + '" style="color:#333333;text-decoration:underline;">' + emp.phone + '</a></span><br/>' : '')
+    + (emp.website ? '<span style="padding-left:10px;"><strong>W:</strong> <a href="https://' + emp.website + '" target="_blank" style="color:#333333;text-decoration:underline;">' + emp.website + '</a></span><br/>' : '')
+    + (emp.address ? '<span style="padding-left:10px;"><strong>A:</strong> ' + emp.address + '</span>' : '')
     + '</td>'
 
     + '</tr>'
@@ -98,7 +98,7 @@ function buildSignatureHtml(emp) {
     + '<tr>'
     + '<td>'
     + '<a href="' + WEBSITE_URL + '" target="_blank" style="text-decoration:none;">'
-    + '<img src="https://NDuggan05.github.io/outlook-signature-addin/assets/' + emp.banner + '" alt="Connacht Hospitality Group" width="500" style="border:0;display:block;" />'
+    + (emp.banner ? '<img src="https://NDuggan05.github.io/outlook-signature-addin/assets/' + emp.banner + '" alt="Connacht Hospitality Group" width="500" style="border:0;display:block;" />' : '')
     + '</a>'
     + '</td>'
     + '</tr>'
@@ -169,3 +169,4 @@ async function onNewMessageCompose(event) {
 //registers with office
 Office.actions.associate("onNewMessageCompose", onNewMessageCompose); //associate the event handler with the OnNewMessageCompose event so it runs automatically when a new email is composed
 }); //end of Office.onReady()
+// https://aka.ms/olksideload --> access add ins
