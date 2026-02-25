@@ -2,11 +2,22 @@
   "NDuggan@chgl.ie": {
     "name": "Nathan Duggan",
     "title": "IT Intern",
-    "phone": "+353 12 345 6789"
+    "phone": "+353861553495",
+    "website": "www.chgl.ie",
+    "address": "Connacht Hotel, Old Dublin Rd, Galway, H91 K5DD"
   },
   "G00435980@atu.ie": {
     "name": "Nathan Duggan",
     "title": "IT Intern",
-    "phone": "+353 12 345 0000"
+    "phone": "+353 12 345 0000",
+    "website": "www.chgl.ie",
+    "address": "Connacht Hotel, Old Dublin Rd, Galway, H91 K5DD"
+  },
+  "arooney@chgl.ie": {
+    "name": "Alan Rooney",
+    "title": "IT Manager",
+    "phone": "+353 12 345 0000",
+    "website": "www.chgl.ie",
+    "address": "Connacht Hotel, Old Dublin Rd, Galway, H91 K5DD"
   }
 }

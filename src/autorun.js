@@ -72,48 +72,46 @@ async function getEmployeeData() {
 // ── Build the signature HTML ─────────────────────────────
 function buildSignatureHtml(emp) {
   var html = ''
-    + '<table cellpadding="0" cellspacing="0" border="0" style="font-family:Arial,Helvetica,sans-serif;font-size:13px;color:#333333;line-height:1.4;">'
+    // ── Row 1: Name/Title + Contact Details ──
+    + '<table cellpadding="0" cellspacing="0" border="0" style="font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#333333;line-height:1.5;">'
     + '<tr>'
 
-    // Left column: Logo
-    + '<td style="padding-right:15px;vertical-align:top;border-right:2px solid #1a3c34;">'
-    + '<a href="' + WEBSITE_URL + '" target="_blank" style="text-decoration:none;">'
-    + '<img src="' + LOGO_URL + '" alt="Connacht Hospitality Group" width="150" style="border:0;display:block;" />'
-    + '</a>'
+    // Left: Name & Title
+    + '<td style="padding-right:20px;vertical-align:top;">'
+    + '<strong style="font-size:14px;color:#000000;">' + emp.name + '</strong><br/>'
+    + '<span style="font-size:12px;color:#666666;">' + emp.title + '</span>'
     + '</td>'
 
-    // Right column: Details
-    + '<td style="padding-left:15px;vertical-align:top;">'
+    // Right: Contact Details
+    + '<td style="padding-left:20px;vertical-align:top;border-left:1px solid #cccccc;">'
+    + '<span style="padding-left:10px;"><strong>E:</strong> <a href="mailto:' + emp.email + '" style="color:#333333;text-decoration:underline;">' + emp.email + '</a></span><br/>'
+    + '<span style="padding-left:10px;"><strong>T:</strong> <a href="tel:' + emp.phone + '" style="color:#333333;text-decoration:underline;">' + emp.phone + '</a></span><br/>'
+    + '<span style="padding-left:10px;"><strong>W:</strong> <a href="https://' + emp.website + '" target="_blank" style="color:#333333;text-decoration:underline;">' + emp.website + '</a></span><br/>'
+    + '<span style="padding-left:10px;"><strong>A:</strong> ' + emp.address + '</span>'
+    + '</td>'
 
-    // Name
-    + '<table cellpadding="0" cellspacing="0" border="0">'
-    + '<tr><td style="font-size:16px;font-weight:bold;color:#1a3c34;padding-bottom:2px;">'
-    + emp.name
-    + '</td></tr>'
-
-    // Job title
-    + '<tr><td style="font-size:13px;color:#666666;padding-bottom:8px;">'
-    + emp.title
-    + '</td></tr>'
-
-    // Phone
-    + '<tr><td style="font-size:12px;color:#333333;padding-bottom:3px;">'
-    + '&#128222; ' + emp.phone
-    + '</td></tr>'
-
-    // Email
-    + '<tr><td style="font-size:12px;color:#333333;padding-bottom:8px;">'
-    + '&#9993; <a href="mailto:' + emp.email + '" style="color:#1a3c34;text-decoration:none;">' + emp.email + '</a>'
-    + '</td></tr>'
-
-    // Social links
-    + '<tr><td style="padding-top:4px;">'
-    + '<a href="' + SOCIAL.linkedin + '" target="_blank" style="text-decoration:none;margin-right:8px;font-size:12px;color:#1a3c34;">LinkedIn</a>'
-    + '<a href="' + SOCIAL.facebook + '" target="_blank" style="text-decoration:none;margin-right:8px;font-size:12px;color:#1a3c34;">Facebook</a>'
-    + '<a href="' + SOCIAL.instagram + '" target="_blank" style="text-decoration:none;font-size:12px;color:#1a3c34;">Instagram</a>'
-    + '</td></tr>'
-
+    + '</tr>'
     + '</table>'
+
+    // ── Row 2: Banner GIF ──
+    + '<table cellpadding="0" cellspacing="0" border="0" style="padding-top:15px;">'
+    + '<tr>'
+    + '<td>'
+    + '<a href="' + WEBSITE_URL + '" target="_blank" style="text-decoration:none;">'
+    + '<img src="' + LOGO_URL + '" alt="Connacht Hospitality Group" width="500" style="border:0;display:block;" />'
+    + '</a>'
+    + '</td>'
+    + '</tr>'
+    + '</table>'
+
+    // ── Row 3: Disclaimer ──
+    + '<table cellpadding="0" cellspacing="0" border="0" style="padding-top:15px;">'
+    + '<tr>'
+    + '<td style="font-size:10px;color:#999999;line-height:1.4;">'
+    + '<strong>Disclaimer:</strong><br/><br/>'
+    + 'This email and any attachments may be confidential and intended only for the named recipient. '
+    + 'If you receive this email or any attachment(s) in error, please contact the sender by return email and delete it. Thank you.<br/><br/>'
+    + 'The sender respects your right to disconnect and does not expect a response outside of your normal working hours unless urgent or pre-agreed.'
     + '</td>'
     + '</tr>'
     + '</table>';
