@@ -1,5 +1,5 @@
 var DATA_URL = "https://NDuggan05.github.io/outlook-signature-addin/data/signatures.json";
-var LOGO_URL = "https://NDuggan05.github.io/outlook-signature-addin/assets/logo.png";
+var LOGO_URL = "https://NDuggan05.github.io/outlook-signature-addin/assets/logo.gif";
 var WEBSITE_URL = "https://www.connachthospitalitygroup.ie/";
 
 var SOCIAL = {
@@ -167,5 +167,5 @@ async function onNewMessageCompose(event) {
 }
 
 //registers with office
-Office.actions.associate("OnNewMessageCompose", onNewMessageCompose); //associate the event handler with the OnNewMessageCompose event so it runs automatically when a new email is composed
+Office.actions.associate("onNewMessageCompose", onNewMessageCompose); //associate the event handler with the OnNewMessageCompose event so it runs automatically when a new email is composed
 
