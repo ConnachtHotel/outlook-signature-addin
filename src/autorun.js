@@ -1,7 +1,7 @@
 Office.onReady(function() { //waits for office to be ready before running the code, which is important for accessing the Office APIs
 
-var DATA_URL = "https://NDuggan05.github.io/outlook-signature-addin/data/signatures.json";
-var LOGO_URL = "https://NDuggan05.github.io/outlook-signature-addin/assets/logo.gif";
+var DATA_URL = "https://ConnachtHotel.github.io/outlook-signature-addin/data/signatures.json";
+var LOGO_URL = "https://ConnachtHotel.github.io/outlook-signature-addin/assets/logo.gif";
 var WEBSITE_URL = "https://www.connachthospitalitygroup.ie/";
 
 var SOCIAL = {
@@ -99,7 +99,7 @@ function buildSignatureHtml(emp) {
     + '<tr>'
     + '<td>'
     + '<a href="' + WEBSITE_URL + '" target="_blank" style="text-decoration:none;">'
-    + (emp.banner ? '<img src="https://NDuggan05.github.io/outlook-signature-addin/assets/' + emp.banner + '" alt="Connacht Hospitality Group" width="500" style="border:0;display:block;" />' : '')
+    + (emp.banner ? '<img src="https://ConnachtHotel.github.io/outlook-signature-addin/assets/' + emp.banner + '" alt="Connacht Hospitality Group" width="500" style="border:0;display:block;" />' : '')
     + '</a>'
     + '</td>'
     + '</tr>'
