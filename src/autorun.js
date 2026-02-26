@@ -45,8 +45,9 @@ async function getEmployeeData() {
   var userEmail = Office.context.mailbox.userProfile.emailAddress; //Office gives you the current users email
   logInfo("Current user email: " + userEmail);
 
-  // **LOCAL TESTING** var response = await fetch(DATA_URL);  grabs JSON database of employee info from GitHub Pages
-  var response = await fetch("https://connacht-signatures.azurewebsites.net/api/signature?email=" + encodeURIComponent(userEmail)); // **PRODUCTION** fetches employee data from an Azure Function API, which looks up the email in the same JSON database but allows for better security and faster lookups than fetching the entire JSON file to the client
+  // **LOCAL TESTING** 
+  var response = await fetch(DATA_URL);  //grabs JSON database of employee info from GitHub Pages
+  //var response = await fetch("https://connacht-signatures.azurewebsites.net/api/signature?email=" + encodeURIComponent(userEmail)); // **PRODUCTION** fetches employee data from an Azure Function API, which looks up the email in the same JSON database but allows for better security and faster lookups than fetching the entire JSON file to the client
 
   if (!response.ok) {
     throw new Error("Failed to fetch signatures.json — status " + response.status);
