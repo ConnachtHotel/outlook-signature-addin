@@ -72,6 +72,7 @@ async function getEmployeeData() {
 }
 
 // ── Build the signature HTML ─────────────────────────────
+//Outlook ignores most CSS, so all styles must be inline and use basic HTML elements like tables for layout.
 function buildSignatureHtml(emp) {
   var html = ''
     // ── Row 1: Name/Title + Contact Details ──
