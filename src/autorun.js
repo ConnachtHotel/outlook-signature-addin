@@ -5,7 +5,7 @@ Office.onReady(function () {
 // WHY: We're no longer fetching a static JSON file. Instead we call the Azure Function
 //      which queries Microsoft Graph (Azure AD) for live employee data.
 //      Replace the URL below with your actual Function App URL from the Azure Portal.
-var API_URL = "https://connachtsignatures.azurewebsites.net/api/signature";
+var API_URL = "https://connachtsignatures-bsbfakbbcjf6fnbb.westeurope-01.azurewebsites.net/api/signature";
 
 // ── CHANGE 2: Removed LOGO_URL ──────────────────────────
 // OLD: var LOGO_URL = "https://ConnachtHotel.github.io/outlook-signature-addin/assets/logo.gif";
