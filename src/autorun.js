@@ -33,7 +33,7 @@ var HOTEL_CONFIG = {
         address: "Connacht Hotel, Old Dublin Rd, Galway, H91 K5DD",
         websiteUrl: "https://www.connachthospitalitygroup.ie/",
         style: {
-            nameColor: "#000000",
+            nameColor: "#008000",
             nameSize: "14px",
             titleColor: "#666666",
             textColor: "#333333",
