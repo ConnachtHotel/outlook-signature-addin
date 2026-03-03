@@ -16,7 +16,7 @@
 
 <AppDomains>
     <AppDomain>https://ConnachtHotel.github.io</AppDomain>
-    <AppDomain>connachtsignatures-bsbfakbbcjf6fnbb.westeurope-01.azurewebsites.net</AppDomain>
+    <AppDomain>https://connachtsignatures-bsbfakbbcjf6fnbb.westeurope-01.azurewebsites.net</AppDomain>
   </AppDomains>
 
   <Hosts>
