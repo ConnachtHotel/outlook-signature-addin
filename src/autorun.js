@@ -35,11 +35,11 @@ var HOTEL_CONFIG = {
         style: {
             nameColor: "#008000",
             nameSize: "14px",
-            titleColor: "#666666",
-            textColor: "#333333",
-            dividerColor: "#cccccc",
-            linkColor: "#333333",
-            disclaimerColor: "#999999",
+            titleColor: "#0b34ec",
+            textColor: "#ee0a0a",
+            dividerColor: "#1f1d1d",
+            linkColor: "#fa14c8",
+            disclaimerColor: "#b4b10d",
             fontFamily: "Arial,Helvetica,sans-serif"
         }
     },
