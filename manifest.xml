@@ -60,6 +60,7 @@
             </Runtime>
           </Runtimes>
 
+          <!--Desktop support-->
           <DesktopFormFactor>
             <FunctionFile resid="WebViewRuntime.Url"/>
 
@@ -70,8 +71,12 @@
               <SourceLocation resid="WebViewRuntime.Url"/>
             </ExtensionPoint>
           </DesktopFormFactor>
-          <!--Mobile support, mobile add ins are expected to only run for 60 mins max-->
+          <!--End of desktop support-->
+
+          <!--Mobile support, mobile add ins are expected to only run for 60 secs max-->
           <MobileFormFactor>
+          <FunctionFile resid="WebViewRuntime.Url"/>
+
           <ExtensionPoint xsi:type="LaunchEvent">
             <LaunchEvents>
               <LaunchEvent Type="OnNewMessageCompose" FunctionName="onNewMessageCompose"/>
@@ -79,6 +84,7 @@
             <SourceLocation resid="WebViewRuntime.Url"/>
           </ExtensionPoint>
         </MobileFormFactor>
+        <!--End of mobile support section-->
         </Host>
       </Hosts>
 
