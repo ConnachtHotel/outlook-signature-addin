@@ -30,10 +30,9 @@
   </Requirements>
 
   <FormSettings>
-    <Form xsi:type="ItemRead">
+    <Form xsi:type="ItemEdit">
       <DesktopSettings>
         <SourceLocation DefaultValue="https://ConnachtHotel.github.io/outlook-signature-addin/src/autorun.html"/>
-        <RequestedHeight>250</RequestedHeight>
       </DesktopSettings>
     </Form>
   </FormSettings>
@@ -41,7 +40,7 @@
   <Permissions>ReadWriteMailbox</Permissions>
 
   <Rule xsi:type="RuleCollection" Mode="Or">
-    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Read"/>
+    <Rule xsi:type="ItemIs" ItemType="Message" FormType="Edit"/>
   </Rule>
 
   <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
@@ -55,6 +54,29 @@
     <Host xsi:type="MailHost">
       <DesktopFormFactor>
         <FunctionFile resid="WebViewRuntime.Url"/>
+        <ExtensionPoint xsi:type="MessageComposeCommandSurface">
+          <OfficeTab id="TabDefault">
+            <Group id="msgComposeGroup">
+              <Label resid="GroupLabel"/>
+              <Tooltip resid="GroupLabel"/>
+              <Control xsi:type="Button" id="msgComposeBtn">
+                <Label resid="GroupLabel"/>
+                <Supertip>
+                  <Title resid="GroupLabel"/>
+                  <Description resid="GroupLabel"/>
+                </Supertip>
+                <Icon>
+                  <bt:Image size="16" resid="Icon.16x16"/>
+                  <bt:Image size="32" resid="Icon.32x32"/>
+                  <bt:Image size="80" resid="Icon.80x80"/>
+                </Icon>
+                <Action xsi:type="ExecuteFunction">
+                  <FunctionName>onNewMessageCompose</FunctionName>
+                </Action>
+              </Control>
+            </Group>
+          </OfficeTab>
+        </ExtensionPoint>
       </DesktopFormFactor>
     </Host>
   </Hosts>
