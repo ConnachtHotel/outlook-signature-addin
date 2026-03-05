@@ -338,9 +338,18 @@ function buildSignatureHtml(emp, config) {
 async function onNewMessageCompose(event) {
     logInfo("OnNewMessageCompose triggered");
 
-    if (!Office.context.requirements.isSetSupported("Mailbox", "1.10")) {
-        logWarn("Mailbox 1.10 not supported");
+    // Mobile safety net — ensures event.completed() is always called
+    // Mobile kills the add-in after 60s, this fires at 55s to exit cleanly
+    var safetyTimeout = setTimeout(function() {
+        logWarn("Safety timeout reached — completing event early");
+        event.completed();
+    }, 55000);
+
+    var bodyItem = Office.context.mailbox.item.body;
+    if (!bodyItem.setSignatureAsync && !bodyItem.prependAsync) {
+        logWarn("Neither setSignatureAsync nor prependAsync supported");
         notifyUser("informational", "Your Outlook version doesn't support automatic signatures.");
+        clearTimeout(safetyTimeout);
         event.completed();
         return;
     }
@@ -351,6 +360,7 @@ async function onNewMessageCompose(event) {
         if (!employee) {
             logWarn("No matching employee found");
             notifyUser("informational", "No signature found for your account. Contact IT to get set up.");
+            clearTimeout(safetyTimeout);
             event.completed();
             return;
         }
@@ -371,21 +381,43 @@ async function onNewMessageCompose(event) {
         // CHANGE: Now passes config as second argument for styling
         var signatureHtml = buildSignatureHtml(employee, config);
 
-        Office.context.mailbox.item.body.setSignatureAsync(
-            signatureHtml,
-            { coercionType: Office.CoercionType.Html },
-            function (asyncResult) {
-                if (asyncResult.status === Office.AsyncResultStatus.Failed) {
-                    logError("setSignatureAsync failed: " + asyncResult.error.message);
-                    notifyUser("error", "Could not set signature: " + asyncResult.error.message);
-                } else {
-                    logInfo("Signature set successfully");
+        if (bodyItem.setSignatureAsync) {
+            // Modern clients — sets signature in the correct position automatically
+            bodyItem.setSignatureAsync(
+                signatureHtml,
+                { coercionType: Office.CoercionType.Html },
+                function (asyncResult) {
+                    clearTimeout(safetyTimeout);
+                    if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+                        logError("setSignatureAsync failed: " + asyncResult.error.message);
+                        notifyUser("error", "Could not set signature: " + asyncResult.error.message);
+                    } else {
+                        logInfo("Signature set successfully");
+                    }
+                    event.completed();
                 }
-                event.completed();
-            }
-        );
+            );
+        } else {
+            // Fallback for older mobile clients that don't support setSignatureAsync
+            logWarn("setSignatureAsync not supported — using prependAsync fallback");
+            bodyItem.prependAsync(
+                signatureHtml,
+                { coercionType: Office.CoercionType.Html },
+                function (asyncResult) {
+                    clearTimeout(safetyTimeout);
+                    if (asyncResult.status === Office.AsyncResultStatus.Failed) {
+                        logError("prependAsync failed: " + asyncResult.error.message);
+                        notifyUser("error", "Could not set signature: " + asyncResult.error.message);
+                    } else {
+                        logInfo("Signature prepended via fallback");
+                    }
+                    event.completed();
+                }
+            );
+        }
 
     } catch (error) {
+        clearTimeout(safetyTimeout);
         logError("Error: " + error.message);
         notifyUser("error", "Could not load signature. Check your connection.");
         event.completed();
