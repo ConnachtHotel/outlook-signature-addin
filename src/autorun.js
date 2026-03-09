@@ -27,6 +27,10 @@ var API_URL = "https://connachtsignatures-bsbfakbbcjf6fnbb.westeurope-01.azurewe
 //      The Azure Function handles the banner selection too, but this config controls
 //      the website link on the banner, the address fallback, and all the styling.
 //      To add a new hotel, just add a new entry here.
+
+//need to add brake after the address, and change all connacht emails tonew logo and website
+
+
 var HOTEL_CONFIG = {
     "@chgl.ie": {
         website: "www.chgl.ie",
@@ -278,19 +282,19 @@ function buildSignatureHtml(emp, config) {
     var html = ''
         // ── Row 1: Name/Title + Contact Details ──
         // CHANGE: font-family and color now come from config.style
-        + '<table cellpadding="0" cellspacing="0" border="0" style="font-family:' + s.fontFamily + ';font-size:12px;color:' + s.textColor + ';line-height:1.5;">'
+        + '<table cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;font-family:' + s.fontFamily + ';font-size:12px;color:' + s.textColor + ';line-height:1.5;">'
         + '<tr>'
 
         // Left: Name & Title
         // CHANGE: nameColor and nameSize come from config.style
-        + '<td style="padding-right:20px;vertical-align:top;">'
+        + '<td style="padding-right:20px;vertical-align:top;padding-bottom:15px;">'
         + (emp.name ? '<strong style="font-size:' + s.nameSize + ';color:' + s.nameColor + ';">' + emp.name + '</strong><br/>' : '')
         + (emp.title ? '<span style="font-size:12px;color:' + s.titleColor + ';">' + emp.title + '</span>' : '')
         + '</td>'
 
         // Right: Contact Details
         // CHANGE: dividerColor and linkColor come from config.style
-        + '<td style="padding-left:20px;vertical-align:top;border-left:1px solid ' + s.dividerColor + ';">'
+        + '<td style="padding-left:20px;vertical-align:top;border-left:1px solid ' + s.dividerColor + ';padding-bottom:15px;">'
         + (emp.email ? '<span style="padding-left:10px;"><strong>E:</strong> <a href="mailto:' + emp.email + '" style="color:' + s.linkColor + ';text-decoration:underline;">' + emp.email + '</a></span><br/>' : '')
         + (emp.phone ? '<span style="padding-left:10px;"><strong>T:</strong> <a href="tel:' + emp.phone + '" style="color:' + s.linkColor + ';text-decoration:underline;">' + emp.phone + '</a></span><br/>' : '')
         + (emp.website ? '<span style="padding-left:10px;"><strong>W:</strong> <a href="https://' + emp.website + '" target="_blank" style="color:' + s.linkColor + ';text-decoration:underline;">' + emp.website + '</a></span><br/>' : '')
@@ -308,7 +312,7 @@ function buildSignatureHtml(emp, config) {
         + '<tr>'
         + '<td>'
         + '<a href="' + config.websiteUrl + '" target="_blank" style="text-decoration:none;">'
-        + (emp.banner ? '<img src="' + emp.banner + '" alt="Connacht Hospitality Group" width="500" style="border:0;display:block;" />' : '')
+        + (emp.banner ? '<img src="' + emp.banner + '" alt="Connacht Hospitality Group" width="500" style="border:0;display:block;max-width:100%;height:auto;" />' : '')
         + '</a>'
         + '</td>'
         + '</tr>'
