@@ -44,7 +44,7 @@
     <Rule xsi:type="ItemIs" ItemType="Message" FormType="Edit"/>
   </Rule>
 
-  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.0" xsi:type="VersionOverridesV1_0">
     <Requirements>
       <bt:Sets>
         <bt:Set Name="Mailbox" MinVersion="1.3"/>
@@ -97,7 +97,6 @@
       </bt:ShortStrings>
     </Resources>
 
-    <!-- V1_1 nested INSIDE V1_0 -->
     <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1" xsi:type="VersionOverridesV1_1">
       <Requirements>
         <bt:Sets>
@@ -151,9 +150,7 @@
       </Resources>
 
     </VersionOverrides>
-    <!-- End V1_1 -->
 
   </VersionOverrides>
-  <!-- End V1_0 -->
 
 </OfficeApp>
