@@ -294,7 +294,7 @@ function buildSignatureHtml(emp, config) {
 
         // Right: Contact Details
         // CHANGE: dividerColor and linkColor come from config.style
-        + '<td style="padding-left:20px;vertical-align:top;border-left:1px solid ' + s.dividerColor + ';padding-bottom:15px;">'
+        + '<td style="padding-left:20px;vertical-align:top;border-left:1px solid ' + s.dividerColor + ';">'
         + (emp.email ? '<span style="padding-left:10px;"><strong>E:</strong> <a href="mailto:' + emp.email + '" style="color:' + s.linkColor + ';text-decoration:underline;">' + emp.email + '</a></span><br/>' : '')
         + (emp.phone ? '<span style="padding-left:10px;"><strong>T:</strong> <a href="tel:' + emp.phone + '" style="color:' + s.linkColor + ';text-decoration:underline;">' + emp.phone + '</a></span><br/>' : '')
         + (emp.website ? '<span style="padding-left:10px;"><strong>W:</strong> <a href="https://' + emp.website + '" target="_blank" style="color:' + s.linkColor + ';text-decoration:underline;">' + emp.website + '</a></span><br/>' : '')
@@ -302,6 +302,11 @@ function buildSignatureHtml(emp, config) {
         + '</td>'
 
         + '</tr>'
+
+        + '<tr>'
+        + '<td colspan="2" style="height:15px;"></td>'
+        + '</tr>'
+
         + '</table>'
 
         // ── Row 2: Banner GIF ──
@@ -316,6 +321,11 @@ function buildSignatureHtml(emp, config) {
         + '</a>'
         + '</td>'
         + '</tr>'
+
+        + '<tr>'
+        + '<td colspan="2" style="height:15px;"></td>'
+        + '</tr>'
+
         + '</table>'
 
         // ── Row 3: Disclaimer ──
