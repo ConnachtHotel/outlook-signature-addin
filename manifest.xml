@@ -6,7 +6,7 @@
            xsi:type="MailApp">
 
   <Id>dff50eba-eccd-49cb-b533-49817e2f07da</Id>
-  <Version>1.0.4.0</Version>
+  <Version>1.0.5.0</Version>
   <ProviderName>Connacht Hospitality Group</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="Connacht Signatures"/>
@@ -101,7 +101,7 @@
     <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1" xsi:type="VersionOverridesV1_1">
       <Requirements>
         <bt:Sets>
-          <bt:Set Name="Mailbox" MinVersion="1.10"/>
+          <bt:Set Name="Mailbox" MinVersion="1.5"/>
         </bt:Sets>
       </Requirements>
 
