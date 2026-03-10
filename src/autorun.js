@@ -411,8 +411,8 @@ async function onNewMessageCompose(event) {
                     event.completed();
                 }
             );
-        } else {
-            // Fallback for older mobile clients that don't support setSignatureAsync
+        } else if (Office.context.mailbox.diagnostics.hostName !== "OutlookIOS") {
+            // Fallback for older desktop clients that don't support setSignatureAsync
             logWarn("setSignatureAsync not supported — using prependAsync fallback");
             bodyItem.prependAsync(
                 signatureHtml,
@@ -428,6 +428,11 @@ async function onNewMessageCompose(event) {
                     event.completed();
                 }
             );
+        } else {
+            // iOS detected — prependAsync not supported in Message Compose, exit cleanly
+            logWarn("iOS detected, setSignatureAsync unavailable — skipping");
+            clearTimeout(safetyTimeout);
+            event.completed();
         }
 
     } catch (error) {
