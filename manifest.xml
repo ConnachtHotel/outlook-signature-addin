@@ -4,7 +4,7 @@
            xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
            xsi:type="MailApp">
 <Id>dff50eba-eccd-49cb-b533-49817e2f07da</Id>
-<Version>1.0.5.1</Version>
+<Version>1.0.5.2</Version>
 <ProviderName>Connacht Hospitality Group</ProviderName>
 <DefaultLocale>en-US</DefaultLocale>
 <DisplayName DefaultValue="Connacht Signatures"/>
