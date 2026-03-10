@@ -2,7 +2,6 @@
 <OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
-           xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
            xsi:type="MailApp">
 <Id>dff50eba-eccd-49cb-b533-49817e2f07da</Id>
 <Version>1.0.5.1</Version>
@@ -58,7 +57,6 @@
           <OfficeTab id="TabDefault">
             <Group id="msgComposeGroup">
               <Label resid="GroupLabel"/>
-              <Tooltip resid="GroupLabel"/>
               <Control xsi:type="Button" id="msgComposeBtn">
                 <Label resid="GroupLabel"/>
                 <Supertip>
