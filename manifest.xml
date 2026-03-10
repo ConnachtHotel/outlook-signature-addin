@@ -2,13 +2,16 @@
 <OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+           xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides"
            xsi:type="MailApp">
+
 <Id>dff50eba-eccd-49cb-b533-49817e2f07da</Id>
 <Version>1.0.5.2</Version>
 <ProviderName>Connacht Hospitality Group</ProviderName>
 <DefaultLocale>en-US</DefaultLocale>
 <DisplayName DefaultValue="Connacht Signatures"/>
 <Description DefaultValue="Automatically sets email signatures for Connacht Hospitality Group employees."/>
+
 <IconUrl DefaultValue="https://ConnachtHotel.github.io/outlook-signature-addin/assets/icon-64.png"/>
 <HighResolutionIconUrl DefaultValue="https://ConnachtHotel.github.io/outlook-signature-addin/assets/icon-128.png"/>
 <SupportUrl DefaultValue="https://www.connachthospitalitygroup.ie"/>
@@ -16,7 +19,7 @@
 <AppDomains>
     <AppDomain>https://ConnachtHotel.github.io</AppDomain>
     <AppDomain>https://connachtsignatures-bsbfakbbcjf6fnbb.westeurope-01.azurewebsites.net</AppDomain>
-  </AppDomains>
+</AppDomains>
 
   <Hosts>
     <Host Name="Mailbox"/>
@@ -42,7 +45,11 @@
     <Rule xsi:type="ItemIs" ItemType="Message" FormType="Edit"/>
   </Rule>
 
-  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" xsi:type="VersionOverridesV1_0">
+  <DisableEntityHighlighting>false</DisableEntityHighlighting>
+
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides" 
+                    xsi:type="VersionOverridesV1_0">
+
   <Requirements>
     <bt:Sets>
       <bt:Set Name="Mailbox" MinVersion="1.3"/>
@@ -53,21 +60,26 @@
     <Host xsi:type="MailHost">
       <DesktopFormFactor>
         <FunctionFile resid="WebViewRuntime.Url"/>
+
         <ExtensionPoint xsi:type="MessageComposeCommandSurface">
           <OfficeTab id="TabDefault">
             <Group id="msgComposeGroup">
               <Label resid="GroupLabel"/>
+
               <Control xsi:type="Button" id="msgComposeBtn">
                 <Label resid="GroupLabel"/>
+
                 <Supertip>
                   <Title resid="GroupLabel"/>
                   <Description resid="GroupLabel"/>
                 </Supertip>
+
                 <Icon>
                   <bt:Image size="16" resid="Icon.16x16"/>
                   <bt:Image size="32" resid="Icon.32x32"/>
                   <bt:Image size="80" resid="Icon.80x80"/>
                 </Icon>
+
                 <Action xsi:type="ExecuteFunction">
                   <FunctionName>onNewMessageCompose</FunctionName>
                 </Action>
@@ -94,7 +106,8 @@
     </bt:ShortStrings>
   </Resources>
 
-  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1" xsi:type="VersionOverridesV1_1">
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/mailappversionoverrides/1.1" 
+                    xsi:type="VersionOverridesV1_1">
     <Requirements>
       <bt:Sets>
         <bt:Set Name="Mailbox" MinVersion="1.10"/>
