@@ -1,35 +1,16 @@
 Office.onReady(function () {
 
-// ── CHANGE 1: Replaced DATA_URL with API_URL ────────────
-// OLD: var DATA_URL = "https://ConnachtHotel.github.io/outlook-signature-addin/data/signatures.json";
-// WHY: We're no longer fetching a static JSON file. Instead we call the Azure Function
-//      which queries Microsoft Graph (Azure AD) for live employee data.
-//      Replace the URL below with your actual Function App URL from the Azure Portal.
+console.log("[ConnachtSig] JS Loaded", new Date().toISOString());
+//actual Function App URL from the Azure Portal.
 var API_URL = "https://connachtsignatures-bsbfakbbcjf6fnbb.westeurope-01.azurewebsites.net/api/signature";
 
-// ── CHANGE 2: Removed LOGO_URL ──────────────────────────
-// OLD: var LOGO_URL = "https://ConnachtHotel.github.io/outlook-signature-addin/assets/logo.gif";
-// WHY: The banner URL now comes from the Azure Function response (emp.banner field).
-//      Each employee gets their banner based on their email suffix, decided by the function.
-//      So we don't need a hardcoded logo URL anymore.
-
-// ── CHANGE 3: Removed WEBSITE_URL and SOCIAL ────────────
-// OLD: var WEBSITE_URL = "https://www.connachthospitalitygroup.ie/";
-// OLD: var SOCIAL = { linkedin: "...", facebook: "...", instagram: "..." };
-// WHY: The website URL now comes from HOTEL_CONFIG based on email suffix.
-//      Social links weren't being used in the current signature template.
-//      If you want them back later, add them to HOTEL_CONFIG per hotel.
-
-// ── CHANGE 4: Added HOTEL_CONFIG ─────────────────────────
+// Added HOTEL_CONFIG ─────────────────────────
 // WHY: Each hotel/brand has different details — banner, website, address, and visual style.
 //      When an employee's email is @theconnacht.ie they get the Connacht config.
 //      When it's @hydehotel.ie they get the Hyde config. And so on.
 //      The Azure Function handles the banner selection too, but this config controls
 //      the website link on the banner, the address fallback, and all the styling.
 //      To add a new hotel, just add a new entry here.
-
-//need to add brake after the address, and change all connacht emails tonew logo and website
-
 
 var HOTEL_CONFIG = {
     "@chgl.ie": {
@@ -269,31 +250,27 @@ async function getEmployeeData() {
     return employee;
 }
 
-// ── CHANGE 7: buildSignatureHtml now takes a config parameter ─
+// buildSignatureHtml now takes a config parameter
 // OLD: Used hardcoded colours and a hardcoded WEBSITE_URL for the banner link.
 // NEW: Takes a config object from HOTEL_CONFIG so every colour, font, and link
 //      can be different per hotel. The banner link now goes to the specific hotel's
 //      website (config.websiteUrl) instead of a hardcoded URL.
-//      Also, emp.banner now contains the full URL from the Azure Function,
-//      so we use it directly instead of building the URL ourselves.
+//      Also, emp.banner now contains the full URL from the Azure Function.
 function buildSignatureHtml(emp, config) {
     var s = config.style;
 
     var html = ''
         // ── Row 1: Name/Title + Contact Details ──
-        // CHANGE: font-family and color now come from config.style
         + '<table cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;font-family:' + s.fontFamily + ';font-size:12px;color:' + s.textColor + ';line-height:1.5;">'
         + '<tr>'
 
         // Left: Name & Title
-        // CHANGE: nameColor and nameSize come from config.style
         + '<td style="padding-right:20px;vertical-align:top;padding-bottom:15px;">'
         + (emp.name ? '<strong style="font-size:' + s.nameSize + ';color:' + s.nameColor + ';">' + emp.name + '</strong><br/>' : '')
         + (emp.title ? '<span style="font-size:12px;color:' + s.titleColor + ';">' + emp.title + '</span>' : '')
         + '</td>'
 
         // Right: Contact Details
-        // CHANGE: dividerColor and linkColor come from config.style
         + '<td style="padding-left:20px;vertical-align:top;border-left:1px solid ' + s.dividerColor + ';">'
         + (emp.email ? '<span style="padding-left:10px;"><strong>E:</strong> <a href="mailto:' + emp.email + '" style="color:' + s.linkColor + ';text-decoration:underline;">' + emp.email + '</a></span><br/>' : '')
         + (emp.phone ? '<span style="padding-left:10px;"><strong>T:</strong> <a href="tel:' + emp.phone + '" style="color:' + s.linkColor + ';text-decoration:underline;">' + emp.phone + '</a></span><br/>' : '')
@@ -310,9 +287,6 @@ function buildSignatureHtml(emp, config) {
         + '</table>'
 
         // ── Row 2: Banner GIF ──
-        // CHANGE: Banner link now uses config.websiteUrl instead of hardcoded WEBSITE_URL
-        // CHANGE: Banner src now uses emp.banner directly (full URL from Azure Function)
-        //         instead of building the URL with a base + filename
         + '<table cellpadding="0" cellspacing="0" border="0" style="padding-top:15px;">'
         + '<tr>'
         + '<td>'
@@ -329,7 +303,6 @@ function buildSignatureHtml(emp, config) {
         + '</table>'
 
         // ── Row 3: Disclaimer ──
-        // CHANGE: disclaimerColor comes from config.style
         + '<table cellpadding="0" cellspacing="0" border="0" style="padding-top:15px;">'
         + '<tr>'
         + '<td style="font-size:10px;color:' + s.disclaimerColor + ';line-height:1.4;">'
@@ -344,15 +317,19 @@ function buildSignatureHtml(emp, config) {
     return html;
 }
 
-// ── CHANGE 8: onNewMessageCompose now applies hotel config ─
-// OLD: Called buildSignatureHtml(employee) with just the employee data.
-// NEW: Looks up the hotel config based on email suffix, merges in the website
-//      and address as fallbacks, then passes both employee and config to the
-//      HTML builder. This is how each hotel gets its own branding.
 async function onNewMessageCompose(event) {
     logInfo("OnNewMessageCompose triggered");
 
-    // Mobile safety net — ensures event.completed() is always called
+    Office.context.mailbox.item.notificationMessages.addAsync(
+  "connachtDebug",
+  {
+    type: Office.MailboxEnums.ItemNotificationMessageType.InformationalMessage,
+    message: "Connacht Signature runtime triggered",
+    icon: "icon16",
+    persistent: false
+  }
+);
+
     // Mobile kills the add-in after 60s, this fires at 55s to exit cleanly
     var safetyTimeout = setTimeout(function() {
         logWarn("Safety timeout reached — completing event early");

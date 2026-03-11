@@ -95,8 +95,8 @@
           <bt:Image id="Icon.80x80" DefaultValue="https://ConnachtHotel.github.io/outlook-signature-addin/assets/icon-80.png"/>
         </bt:Images>
         <bt:Urls>
-          <bt:Url id="WebViewRuntime.Url" DefaultValue="https://ConnachtHotel.github.io/outlook-signature-addin/src/autorun.html"/><!--link to HTML page-->
-          <bt:Url id="JSRuntime.Url" DefaultValue="https://ConnachtHotel.github.io/outlook-signature-addin/src/autorun.js"/><!--link to JS page-->
+          <bt:Url id="WebViewRuntime.Url" DefaultValue="https://ConnachtHotel.github.io/outlook-signature-addin/src/autorun.html?v=1.0.2"/><!--link to HTML page, change versions if updating-->
+          <bt:Url id="JSRuntime.Url" DefaultValue="https://ConnachtHotel.github.io/outlook-signature-addin/src/autorun.js?v=1.0.2"/><!--link to JS page-->
         </bt:Urls>
         <bt:ShortStrings>
           <bt:String id="GroupLabel" DefaultValue="Connacht Signatures"/>
