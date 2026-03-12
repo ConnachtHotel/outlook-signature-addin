@@ -324,8 +324,8 @@ async function onNewMessageCompose(event) {
   "connachtDebug",
   {
     type: Office.MailboxEnums.ItemNotificationMessageType.InformationalMessage,
-    message: "Connacht Signature runtime triggered",
-    icon: "icon16",
+    message: "Signature add-in running...",
+    icon: "icon-16.png",
     persistent: false
   }
 );
