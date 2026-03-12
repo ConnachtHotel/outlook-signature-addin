@@ -325,7 +325,7 @@ async function onNewMessageCompose(event) {
   {
     type: Office.MailboxEnums.ItemNotificationMessageType.InformationalMessage,
     message: "Signature add-in running...",
-    icon: "icon-16.png",
+    icon: "Icon.16x16",
     persistent: false
   }
 );
