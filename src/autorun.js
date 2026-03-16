@@ -373,6 +373,12 @@ async function onNewMessageCompose(event) {
 
         logInfo("Employee found: " + employee.name);
 
+        logInfo("Looking up config for email: " + employee.email);//Logs the email being used to find the config
+
+        var config = getConfigForEmail(employee.email);
+
+        logInfo("Matched config website: " + config.website);//Logs the matched config website to verify correct config is applied
+
         // NEW: Get the hotel config based on email suffix
         var config = getConfigForEmail(employee.email);
 
