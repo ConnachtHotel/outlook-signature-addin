@@ -163,6 +163,21 @@ var HOTEL_CONFIG = {
             fontFamily: "Arial,Helvetica,sans-serif"
         }
     },
+    "@thehawthorngolf.ie": {
+        website: "www.thehawthorngolf.ie",
+        address: "Hawthorn Hotel, Galway",
+        websiteUrl: "https://www.thehawthornhotel.ie/", //not sure if i need to change this to diff website?
+        style: {
+            nameColor: "#000000",
+            nameSize: "14px",
+            titleColor: "#666666",
+            textColor: "#333333",
+            dividerColor: "#cccccc",
+            linkColor: "#333333",
+            disclaimerColor: "#999999",
+            fontFamily: "Arial,Helvetica,sans-serif"
+        }
+    },
     "default": {
         website: "www.chgl.ie",
         address: "Connacht Hotel, Old Dublin Rd, Galway, H91 K5DD",
