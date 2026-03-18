@@ -75,7 +75,7 @@ var HOTEL_CONFIG = {
     },
     "@anpucan.ie": {
         website: "www.anpucan.ie",
-        address: "Forster St, Galway",
+        address: "Forster St, Galway, H91 P65D",
         websiteUrl: "https://www.anpucan.ie/",
         style: {
             nameColor: "#000000",
@@ -90,7 +90,7 @@ var HOTEL_CONFIG = {
     },
     "@activefitness.ie": {
         website: "www.activefitness.ie",
-        address: "Old Dublin Rd, Galway",
+        address: "Old Dublin Rd, Galway, H91 K5DD",
         websiteUrl: "https://www.activefitness.ie/",
         style: {
             nameColor: "#000000",
@@ -120,7 +120,7 @@ var HOTEL_CONFIG = {
     },
     "@thehawthornhotel.ie": {
         website: "www.thehawthornhotel.ie",
-        address: "Hawthorn Hotel, Galway",
+        address: "Hawthorn Hotel, Galway, H91 YXR7",
         websiteUrl: "https://www.thehawthornhotel.ie/",
         style: {
             nameColor: "#000000",
@@ -165,7 +165,7 @@ var HOTEL_CONFIG = {
     },
     "@thehawthorngolf.ie": {
         website: "www.thehawthorngolf.ie",
-        address: "Hawthorn Hotel, Galway",
+        address: "Hawthorn Hotel, Galway, H91 YXR7",
         websiteUrl: "https://www.thehawthornhotel.ie/", //not sure if i need to change this to diff website?
         style: {
             nameColor: "#000000",
