@@ -14,8 +14,8 @@ var API_URL = "https://connachtsignatures-bsbfakbbcjf6fnbb.westeurope-01.azurewe
 
 const EMAIL_OVERRIDES = {
     "conferencing@chgl.ie": {
-        displayName: "Robyn O'Neill",
-        jobTitle: "Meetings & Events Co-ordinator",
+        name: "Robyn O'Neill",
+        title: "Meetings & Events Co-ordinator",
     }
 };
 
@@ -379,6 +379,13 @@ async function onNewMessageCompose(event) {
         }
 
         logInfo("Employee found: " + employee.name);
+
+        // Apply per-email overrides (name, title, etc.)
+        var emailLower = employee.email.toLowerCase();
+        if (EMAIL_OVERRIDES[emailLower]) {
+            Object.assign(employee, EMAIL_OVERRIDES[emailLower]);
+            logInfo("Applied override for: " + emailLower);
+        }
 
         logInfo("Looking up config for email: " + employee.email);//Logs the email being used to find the config
 
