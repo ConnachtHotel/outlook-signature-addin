@@ -13,10 +13,10 @@ var API_URL = "https://connachtsignatures-bsbfakbbcjf6fnbb.westeurope-01.azurewe
 //      To add a new hotel, just add a new entry here.
 
 const EMAIL_OVERRIDES = {
-    "conferencing@chgl.ie": {
+    /*"conferencing@chgl.ie": {
         name: "Robyn O'Neill",
         title: "Meetings & Events Co-ordinator",
-    }
+    }*/
 };
 
 var HOTEL_CONFIG = {
