@@ -24,6 +24,12 @@ var HOTEL_CONFIG = {
         website: "www.chgl.ie",
         address: "Connacht Hotel, Old Dublin Rd, Galway, H91 K5DD",
         websiteUrl: "https://www.connachthospitalitygroup.ie/",
+        teamOverrides: {
+            "GREEN": {
+                banner: "https://ConnachtHotel.github.io/outlook-signature-addin/assets/newLogo.gif",
+                teamName: "Member of Green Tourism & Green Meetings"
+            }
+        },
         style: {
             nameColor: "#000000",
             nameSize: "14px",
@@ -39,6 +45,12 @@ var HOTEL_CONFIG = {
         website: "www.theconnacht.ie",
         address: "Connacht Hotel, Old Dublin Rd, Galway, H91 K5DD",
         websiteUrl: "https://www.theconnacht.ie/",
+        teamOverrides: {
+            "GREEN": {
+                banner: "https://ConnachtHotel.github.io/outlook-signature-addin/assets/newLogo.gif",
+                teamName: "Member of Green Tourism & Green Meetings"
+            }
+        },
         style: {
             nameColor: "#000000",
             nameSize: "14px",
@@ -54,6 +66,7 @@ var HOTEL_CONFIG = {
         website: "www.hydehotel.ie",
         address: "Forster St, Galway, H91 R2K3",
         websiteUrl: "https://www.hydehotel.ie/",
+        teamOverrides: {}, // no sub-teams for this hotel
         style: {
             nameColor: "#000000",
             nameSize: "14px",
@@ -69,6 +82,7 @@ var HOTEL_CONFIG = {
         website: "www.theresidencehotel.ie",
         address: "14 Quay Street, Galway, H91 X580",
         websiteUrl: "https://www.theresidencehotel.ie/",
+        teamOverrides: {}, // no sub-teams for this hotel
         style: {
             nameColor: "#000000",
             nameSize: "14px",
@@ -84,6 +98,7 @@ var HOTEL_CONFIG = {
         website: "www.anpucan.ie",
         address: "Forster St, Galway, H91 P65D",
         websiteUrl: "https://www.anpucan.ie/",
+        teamOverrides: {}, // no sub-teams for this hotel
         style: {
             nameColor: "#000000",
             nameSize: "14px",
@@ -99,6 +114,7 @@ var HOTEL_CONFIG = {
         website: "www.activefitness.ie",
         address: "Old Dublin Rd, Galway, H91 K5DD",
         websiteUrl: "https://www.activefitness.ie/",
+        teamOverrides: {}, // no sub-teams for this hotel
         style: {
             nameColor: "#000000",
             nameSize: "14px",
@@ -114,6 +130,7 @@ var HOTEL_CONFIG = {
         website: "www.galwayhooker.ie",
         address: "Galway City",
         websiteUrl: "https://www.galwayhooker.ie/",
+        teamOverrides: {}, // no sub-teams for this hotel
         style: {
             nameColor: "#000000",
             nameSize: "14px",
@@ -129,6 +146,7 @@ var HOTEL_CONFIG = {
         website: "www.thehawthornhotel.ie",
         address: "Hawthorn Hotel, Galway, H91 YXR7",
         websiteUrl: "https://www.thehawthornhotel.ie/",
+        teamOverrides: {}, // no sub-teams for this hotel
         style: {
             nameColor: "#000000",
             nameSize: "14px",
@@ -144,6 +162,7 @@ var HOTEL_CONFIG = {
         website: "www.mfitzgeraldsbar.ie",
         address: "Galway City",
         websiteUrl: "https://www.mfitzgeraldsbar.ie/",
+        teamOverrides: {}, // no sub-teams for this hotel
         style: {
             nameColor: "#000000",
             nameSize: "14px",
@@ -159,6 +178,7 @@ var HOTEL_CONFIG = {
         website: "www.connachthospitalitygroup.ie",
         address: "Connacht Hotel, Old Dublin Rd, Galway, H91 K5DD",
         websiteUrl: "https://www.connachthospitalitygroup.ie/",
+        teamOverrides: {}, // no sub-teams for this hotel
         style: {
             nameColor: "#000000",
             nameSize: "14px",
@@ -173,7 +193,8 @@ var HOTEL_CONFIG = {
     "@thehawthorngolf.ie": {
         website: "www.thehawthorngolf.ie",
         address: "Hawthorn Hotel, Galway, H91 YXR7",
-        websiteUrl: "https://www.thehawthornhotel.ie/", //not sure if i need to change this to diff website?
+        websiteUrl: "https://www.thehawthornhotel.ie/",
+        teamOverrides: {}, // no sub-teams for this hotel
         style: {
             nameColor: "#000000",
             nameSize: "14px",
@@ -189,6 +210,7 @@ var HOTEL_CONFIG = {
         website: "www.chgl.ie",
         address: "Connacht Hotel, Old Dublin Rd, Galway, H91 K5DD",
         websiteUrl: "https://www.connachthospitalitygroup.ie/",
+        teamOverrides: {}, // no sub-teams for this hotel
         style: {
             nameColor: "#000000",
             nameSize: "14px",
@@ -297,7 +319,8 @@ function buildSignatureHtml(emp, config) {
         + (emp.email ? '<span style="padding-left:10px;"><strong>E:</strong> <a href="mailto:' + emp.email + '" style="color:' + s.linkColor + ';text-decoration:underline;">' + emp.email + '</a></span><br/>' : '')
         + (emp.phone ? '<span style="padding-left:10px;"><strong>T:</strong> <a href="tel:' + emp.phone + '" style="color:' + s.linkColor + ';text-decoration:underline;">' + emp.phone + '</a></span><br/>' : '')
         + (emp.website ? '<span style="padding-left:10px;"><strong>W:</strong> <a href="https://' + emp.website + '" target="_blank" style="color:' + s.linkColor + ';text-decoration:underline;">' + emp.website + '</a></span><br/>' : '')
-        + (emp.address ? '<span style="padding-left:10px;"><strong>A:</strong> ' + emp.address + '</span>' : '')
+        + (emp.address ? '<span style="padding-left:10px;"><strong>A:</strong> ' + emp.address + '</span><br/>' : '')
+        + (emp.memberLine ? '<span style="padding-left:10px;"><strong>' + emp.memberLine + '</strong></span>' : '')
         + '</td>'
 
         + '</tr>'
@@ -391,10 +414,17 @@ async function onNewMessageCompose(event) {
 
         var config = getConfigForEmail(employee.email);
 
-        logInfo("Matched config website: " + config.website);//Logs the matched config website to verify correct config is applied
+        //team override for groups in case different styling is needed
+        if (employee.teamCode && config.teamOverrides) {
+            var override = config.teamOverrides[employee.teamCode.trim().toUpperCase()]; 
+            if (override) {
+                if (override.banner)     employee.banner = override.banner; //team-specific banner from config override
+                if (override.memberLine) employee.memberLine = override.memberLine; //additional line for team membership (e.g. Green Tourism)
+                logInfo("Team override applied — code: " + employee.teamCode); //debugging
+            }
+        }
 
-        // NEW: Get the hotel config based on email suffix
-        var config = getConfigForEmail(employee.email);
+        logInfo("Matched config website: " + config.website);//Logs the matched config website to verify correct config is applied
 
         // NEW: Apply config values as fallbacks
         // Banner always comes from the Azure Function (based on email suffix in signature.js)
