@@ -25,7 +25,7 @@ var HOTEL_CONFIG = {
         address: "Connacht Hotel, Old Dublin Rd, Galway, H91 K5DD",
         websiteUrl: "https://www.connachthospitalitygroup.ie/",
         teamOverrides: {
-            "GREEN": {
+            "GREEN": { //the actual value from entra, its the faxNumber field on entra
                 banner: "https://ConnachtHotel.github.io/outlook-signature-addin/assets/newLogo.gif",
                 teamName: "Member of Green Tourism & Green Meetings"
             }
@@ -325,7 +325,7 @@ function buildSignatureHtml(emp, config) {
         + (emp.phone ? '<span style="padding-left:10px;"><strong>T:</strong> <a href="tel:' + emp.phone + '" style="color:' + s.linkColor + ';text-decoration:underline;">' + emp.phone + '</a></span><br/>' : '')
         + (emp.website ? '<span style="padding-left:10px;"><strong>W:</strong> <a href="https://' + emp.website + '" target="_blank" style="color:' + s.linkColor + ';text-decoration:underline;">' + emp.website + '</a></span><br/>' : '')
         + (emp.address ? '<span style="padding-left:10px;"><strong>A:</strong> ' + emp.address + '</span><br/>' : '')
-        + (emp.memberLine ? '<span style="padding-left:10px;"><strong>' + emp.memberLine + '</strong></span>' : '')
+        + (emp.teamName ? '<span style="padding-left:10px;"><strong>' + emp.teamName + '</strong></span>' : '')
         + '</td>'
 
         + '</tr>'
@@ -424,7 +424,7 @@ async function onNewMessageCompose(event) {
             var override = config.teamOverrides[employee.teamCode.trim().toUpperCase()]; 
             if (override) {
                 if (override.banner)     employee.banner = override.banner; //team-specific banner from config override
-                if (override.memberLine) employee.memberLine = override.memberLine; //additional line for team membership (e.g. Green Tourism)
+                if (override.teamName) employee.teamName = override.teamName; //team-specific name from config override
                 logInfo("Team override applied — code: " + employee.teamCode); //debugging
             }
         }
