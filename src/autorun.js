@@ -114,7 +114,11 @@ var HOTEL_CONFIG = {
         website: "www.activefitness.ie",
         address: "Old Dublin Rd, Galway, H91 K5DD",
         websiteUrl: "https://www.activefitness.ie/",
-        teamOverrides: {}, // no sub-teams for this hotel
+        teamOverrides: {
+            "GREEN": { //the actual value from entra, its the faxNumber field on entra
+                teamName: "Member of Green Tourism & Green Meetings"
+            }
+        },
         style: {
             nameColor: "#000000",
             nameSize: "14px",
