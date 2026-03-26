@@ -178,7 +178,12 @@ var HOTEL_CONFIG = {
         website: "www.connachthospitalitygroup.ie",
         address: "Connacht Hotel, Old Dublin Rd, Galway, H91 K5DD",
         websiteUrl: "https://www.connachthospitalitygroup.ie/",
-        teamOverrides: {}, // no sub-teams for this hotel
+        teamOverrides: {
+            "GREEN": { //the actual value from entra, its the faxNumber field on entra
+                banner: "https://ConnachtHotel.github.io/outlook-signature-addin/assets/newLogo.gif",
+                teamName: "Member of Green Tourism & Green Meetings"
+            }
+        },
         style: {
             nameColor: "#000000",
             nameSize: "14px",
