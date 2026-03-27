@@ -29,6 +29,18 @@ var HOTEL_CONFIG = {
                 banner: "https://ConnachtHotel.github.io/outlook-signature-addin/assets/newLogo.gif",
                 teamName: "Member of Green Tourism & Green Meetings"
             }
+            //
+            /*
+            !!---to add another team/ group simply add in this format:---!!
+
+            "value you want from faxNumber in entra": {
+                banner: "optional team-specific banner URL (falls back to employee banner or hotel default)",
+                teamName: "optional team name to display in signature (falls back to employee teamName or nothing)"
+                other style overrides could also be added here in the future if needed, but currently only banner and teamName are supported in teamOverrides
+             }  
+            
+             !!---must be in the teamOverrides object of the relevant hotel---!!
+            */
         },
         style: {
             nameColor: "#000000",
