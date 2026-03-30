@@ -344,7 +344,7 @@ function buildSignatureHtml(emp, config) {
         + '<td style="padding-left:20px;vertical-align:top;border-left:1px solid ' + s.dividerColor + ';">'
         + (emp.email ? '<span style="padding-left:10px;"><strong>E:</strong> <a href="mailto:' + emp.email + '" style="color:' + s.linkColor + ';text-decoration:underline;">' + emp.email + '</a></span><br/>' : '')
         + (emp.phone ? '<span style="padding-left:10px;"><strong>T:</strong> <a href="tel:' + emp.phone + '" style="color:' + s.linkColor + ';text-decoration:underline;">' + emp.phone + '</a></span><br/>' : '')
-        + (emp.Mphone ? '<span style="padding-left:10px;"><strong>T:</strong> <a href="tel:' + emp.Mphone + '" style="color:' + s.linkColor + ';text-decoration:underline;">' + emp.Mphone + '</a></span><br/>' : '')
+        + (emp.Mphone ? '<span style="padding-left:10px;"><strong>M:</strong> <a href="tel:' + emp.Mphone + '" style="color:' + s.linkColor + ';text-decoration:underline;">' + emp.Mphone + '</a></span><br/>' : '')
         + (emp.website ? '<span style="padding-left:10px;"><strong>W:</strong> <a href="https://' + emp.website + '" target="_blank" style="color:' + s.linkColor + ';text-decoration:underline;">' + emp.website + '</a></span><br/>' : '')
         + (emp.address ? '<span style="padding-left:10px;"><strong>A:</strong> ' + emp.address + '</span><br/>' : '')
         + (emp.teamName ? '<span style="padding-left:10px;"><strong>' + emp.teamName + '</strong></span>' : '')
