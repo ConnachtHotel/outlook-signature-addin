@@ -160,7 +160,7 @@ var HOTEL_CONFIG = {
     },
     "@thehawthornhotel.ie": {
         website: "www.thehawthornhotel.ie",
-        address: "Hawthorn Hotel, Galway, H91 YXR7",
+        address: "Hawthorn Hotel, Renville, Oranmore Co. Galway, H91 YXR7",
         websiteUrl: "https://www.thehawthornhotel.ie/",
         teamOverrides: {}, // no sub-teams for this hotel
         style: {
@@ -213,7 +213,7 @@ var HOTEL_CONFIG = {
     },
     "@thehawthorngolf.ie": {
         website: "www.thehawthorngolf.ie",
-        address: "Hawthorn Hotel, Galway, H91 YXR7",
+        address: "Hawthorn Hotel, Renville, Oranmore Co. Galway, H91 T4A4",
         websiteUrl: "https://www.thehawthornhotel.ie/",
         teamOverrides: {}, // no sub-teams for this hotel
         style: {
