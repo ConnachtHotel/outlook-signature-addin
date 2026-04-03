@@ -359,7 +359,7 @@ function buildSignatureHtml(emp, config) {
         + '</table>'
 
         // ── Row 2: Banner GIF ──
-        + '<br></br>'
+        + '</br>'
         + '<table cellpadding="0" cellspacing="0" border="0" style="padding-top:15px;">'
         + '<tr>'
         + '<td>'
