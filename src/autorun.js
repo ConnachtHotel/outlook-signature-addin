@@ -326,7 +326,7 @@ function buildSignatureHtml(emp, config) {
 
     var html = ''
         // ── Kind Regards ── (Or whatever send off message is wanted)
-        + '</br>'
+        + '<br>'
         + '<table cellpadding="0" cellspacing="0" border="0" style="font-family:' + s.fontFamily + ';font-size:12px;color:' + s.textColor + ';">'
         + '<tr><td style="padding-bottom:15px;">Kind regards,</td></tr>'
         + '</table>'
