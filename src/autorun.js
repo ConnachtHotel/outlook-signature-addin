@@ -54,6 +54,7 @@ var HOTEL_CONFIG = {
         }
     },
     "@theconnacht.ie": {
+        hotelName: "The Connacht Hotel",
         website: "www.theconnacht.ie",
         address: "Connacht Hotel, Old Dublin Rd, Galway, H91 K5DD",
         websiteUrl: "https://www.theconnacht.ie/",
@@ -75,6 +76,7 @@ var HOTEL_CONFIG = {
         }
     },
     "@hydehotel.ie": {
+        hotelName: "Hyde Hotel",
         website: "www.hydehotel.ie",
         address: "Forster St, Galway, H91 R2K3",
         websiteUrl: "https://www.hydehotel.ie/",
@@ -91,8 +93,9 @@ var HOTEL_CONFIG = {
         }
     },
     "@theresidencehotel.ie": {
+        hotelName: "The Residence Hotel",
         website: "www.theresidencehotel.ie",
-        address: "14 Quay Street, Galway, H91 X580",
+        address: "14 Quay Street, Galway, H91 P628",
         websiteUrl: "https://www.theresidencehotel.ie/",
         teamOverrides: {}, // no sub-teams for this hotel
         style: {
@@ -107,6 +110,7 @@ var HOTEL_CONFIG = {
         }
     },
     "@anpucan.ie": {
+        hotelName: "An Púcán",
         website: "www.anpucan.ie",
         address: "Forster St, Galway, H91 P65D",
         websiteUrl: "https://www.anpucan.ie/",
@@ -123,6 +127,7 @@ var HOTEL_CONFIG = {
         }
     },
     "@activefitness.ie": {
+        hotelName: "Active Fitness",
         website: "www.activefitness.ie",
         address: "Old Dublin Rd, Galway, H91 K5DD",
         websiteUrl: "https://www.activefitness.ie/",
@@ -159,6 +164,7 @@ var HOTEL_CONFIG = {
         }
     },
     "@thehawthornhotel.ie": {
+        hotelName: "The Hawthorn Hotel",
         website: "www.thehawthornhotel.ie",
         address: "Hawthorn Hotel, Renville, Oranmore Co. Galway, H91 YXR7",
         websiteUrl: "https://www.thehawthornhotel.ie/",
@@ -175,8 +181,9 @@ var HOTEL_CONFIG = {
         }
     },
     "@mfitzgeraldsbar.ie": {
+        hotelName: "M Fitzgerald's Bar",
         website: "www.mfitzgeraldsbar.ie",
-        address: "Galway City",
+        address: "14 Quay Street, Galway, H91 P628",
         websiteUrl: "https://www.mfitzgeraldsbar.ie/",
         teamOverrides: {}, // no sub-teams for this hotel
         style: {
@@ -212,6 +219,7 @@ var HOTEL_CONFIG = {
         }
     },
     "@thehawthorngolf.ie": {
+        hotelName: "The Hawthorn Golf Club",
         website: "www.thehawthorngolf.ie",
         address: "Hawthorn Hotel, Renville, Oranmore Co. Galway, H91 T4A4",
         websiteUrl: "https://www.thehawthornhotel.ie/",
@@ -339,6 +347,7 @@ function buildSignatureHtml(emp, config) {
         + '<td style="padding-right:20px;vertical-align:top;padding-bottom:15px;">'
         + (emp.name ? '<strong style="font-size:' + s.nameSize + ';color:' + s.nameColor + ';">' + emp.name + '</strong><br/>' : '')
         + (emp.title ? '<span style="font-size:12px;color:' + s.titleColor + ';">' + emp.title + '</span>' : '')
+        + (config.hotelName ? '<br/><span style="font-size:12px;color:' + s.titleColor + ';">' + config.hotelName + '</span>' : '')
         + '</td>'
 
         // Right: Contact Details
