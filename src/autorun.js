@@ -164,7 +164,7 @@ var HOTEL_CONFIG = {
         }
     },
     "@thehawthornhotel.ie": {
-        hotelName: "The Hawthorn Hotel by Galway Bay",
+        hotelName: "The Hawthorn by Galway Bay",
         website: "www.thehawthornhotel.ie",
         address: "Hawthorn Hotel, Renville, Oranmore Co. Galway, H91 YXR7",
         websiteUrl: "https://www.thehawthornhotel.ie/",
@@ -219,7 +219,7 @@ var HOTEL_CONFIG = {
         }
     },
     "@thehawthorngolf.ie": {
-        hotelName: "The Hawthorn Golf Club by Galway Bay",
+        hotelName: "The Hawthorn by Galway Bay",
         website: "www.thehawthorngolf.ie",
         address: "Hawthorn Hotel, Renville, Oranmore Co. Galway, H91 T4A4",
         websiteUrl: "https://www.thehawthornhotel.ie/",
