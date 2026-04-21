@@ -185,7 +185,11 @@ var HOTEL_CONFIG = {
         website: "www.mfitzgeraldsbar.ie",
         address: "14 Quay Street, Galway, H91 P628",
         websiteUrl: "https://www.mfitzgeraldsbar.ie/",
-        teamOverrides: {}, // no sub-teams for this hotel
+        teamOverrides: {
+                "T&Cs": { //the actual value from entra, its the faxNumber field on entra
+                teamName: "Terms & Conditions: https://mfitzgeraldsbar.ie/booking-terms/"
+            }
+        }, // no sub-teams for this hotel
         style: {
             nameColor: "#000000",
             nameSize: "14px",
