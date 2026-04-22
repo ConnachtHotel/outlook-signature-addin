@@ -76,7 +76,7 @@ var HOTEL_CONFIG = {
         }
     },
     "@hydehotel.ie": {
-        hotelName: "The Hyde Hotel",
+        hotelName: "Hyde Hotel",
         website: "www.hydehotel.ie",
         address: "Forster St, Galway, H91 R2K3",
         websiteUrl: "https://www.hydehotel.ie/",
@@ -186,10 +186,10 @@ var HOTEL_CONFIG = {
         address: "14 Quay Street, Galway, H91 P628",
         websiteUrl: "https://www.mfitzgeraldsbar.ie/",
         teamOverrides: {
-                "T&Cs": { //the actual value from entra, its the faxNumber field on entra
+                "T&Cs": { 
                 teamName: "Terms & Conditions: https://mfitzgeraldsbar.ie/booking-terms/"
             }
-        }, // no sub-teams for this hotel
+        },
         style: {
             nameColor: "#000000",
             nameSize: "14px",
