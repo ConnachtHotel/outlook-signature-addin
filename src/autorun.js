@@ -12,7 +12,9 @@ var API_URL = "https://connachtsignatures-bsbfakbbcjf6fnbb.westeurope-01.azurewe
 //      the website link on the banner, the address fallback, and all the styling.
 //      To add a new hotel, just add a new entry here.
 
-const EMAIL_OVERRIDES = {
+// NOTE: declared with var (not const) so the script parses on legacy
+// Outlook Classic runtimes that fall back to the IE11 / Trident webview.
+var EMAIL_OVERRIDES = {
     /*"conferencing@chgl.ie": {
         name: "Robyn O'Neill",
         title: "Meetings & Events Co-ordinator",
@@ -299,32 +301,47 @@ function getConfigForEmail(email) {
     return HOTEL_CONFIG["default"];
 }
 
-// ── CHANGE 6: Completely rewritten getEmployeeData ───────
-// OLD: Fetched the entire JSON file, then looped through every employee to find a match.
-// NEW: Calls the Azure Function with just the email. The function calls Microsoft Graph,
-//      finds the employee in Azure AD, and returns only that one employee's data.
-//      No more looping. No more maintaining a JSON file.
-//      The response is already in the right format — name, title, phone, email, banner, etc.
-async function getEmployeeData() {
+// ── getEmployeeData ──────────────────────────────────────
+// Calls the Azure Function with just the email. The function calls Microsoft Graph,
+// finds the employee in Azure AD, and returns only that one employee's data.
+//
+// Implemented with XMLHttpRequest + Promise rather than fetch/async-await so that
+// the script also parses and runs on the IE11/Trident webview that Outlook
+// Classic on Windows uses when Edge WebView2 isn't installed. Promise itself
+// is polyfilled by office.js, so it's safe on every supported host.
+function getEmployeeData() {
     var userEmail = Office.context.mailbox.userProfile.emailAddress;
     logInfo("Current user email: " + userEmail);
 
-    var response = await fetch(API_URL + "?email=" + encodeURIComponent(userEmail));
+    return new Promise(function (resolve, reject) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", API_URL + "?email=" + encodeURIComponent(userEmail), true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState !== 4) return;
 
-    // 404 means the employee wasn't found in Azure AD
-    if (response.status === 404) {
-        logWarn("No employee found in Azure AD for: " + userEmail);
-        return null;
-    }
+            // 404 means the employee wasn't found in Azure AD
+            if (xhr.status === 404) {
+                logWarn("No employee found in Azure AD for: " + userEmail);
+                resolve(null);
+                return;
+            }
 
-    if (!response.ok) {
-        throw new Error("API request failed — status " + response.status);
-    }
+            if (xhr.status < 200 || xhr.status >= 300) {
+                reject(new Error("API request failed — status " + xhr.status));
+                return;
+            }
 
-    // The Azure Function returns a single employee object directly
-    // No need to loop or search — it's already the right person
-    var employee = await response.json();
-    return employee;
+            try {
+                resolve(JSON.parse(xhr.responseText));
+            } catch (parseErr) {
+                reject(parseErr);
+            }
+        };
+        xhr.onerror = function () {
+            reject(new Error("Network error contacting signature API"));
+        };
+        xhr.send();
+    });
 }
 
 // buildSignatureHtml now takes a config parameter
@@ -404,21 +421,24 @@ function buildSignatureHtml(emp, config) {
     return html;
 }
 
-async function onNewMessageCompose(event) {
+// Implemented as a regular function returning a Promise chain (no async/await)
+// because Outlook Classic on Windows can run this code in an IE11/Trident
+// webview where async/await is a parse error.
+function onNewMessageCompose(event) {
     logInfo("OnNewMessageCompose triggered");
 
     Office.context.mailbox.item.notificationMessages.addAsync(
-  "connachtDebug",
-  {
-    type: Office.MailboxEnums.ItemNotificationMessageType.InformationalMessage,
-    message: "Signature add-in running...",
-    icon: "Icon.16x16",
-    persistent: false
-  }
-);
+        "connachtDebug",
+        {
+            type: Office.MailboxEnums.ItemNotificationMessageType.InformationalMessage,
+            message: "Signature add-in running...",
+            icon: "Icon.16x16",
+            persistent: false
+        }
+    );
 
     // Mobile kills the add-in after 60s, this fires at 55s to exit cleanly
-    var safetyTimeout = setTimeout(function() {
+    var safetyTimeout = setTimeout(function () {
         logWarn("Safety timeout reached — completing event early");
         event.completed();
     }, 55000);
@@ -432,9 +452,7 @@ async function onNewMessageCompose(event) {
         return;
     }
 
-    try {
-        var employee = await getEmployeeData();
-
+    getEmployeeData().then(function (employee) {
         if (!employee) {
             logWarn("No matching employee found");
             notifyUser("informational", "No signature found for your account. Contact IT to get set up.");
@@ -445,10 +463,16 @@ async function onNewMessageCompose(event) {
 
         logInfo("Employee found: " + employee.name);
 
-        // Apply per-email overrides (name, title, etc.)
+        // Apply per-email overrides (name, title, etc.).
+        // Manual property copy instead of Object.assign — IE11/Trident lacks it.
         var emailLower = employee.email.toLowerCase();
-        if (EMAIL_OVERRIDES[emailLower]) {
-            Object.assign(employee, EMAIL_OVERRIDES[emailLower]);
+        var emailOverride = EMAIL_OVERRIDES[emailLower];
+        if (emailOverride) {
+            for (var key in emailOverride) {
+                if (Object.prototype.hasOwnProperty.call(emailOverride, key)) {
+                    employee[key] = emailOverride[key];
+                }
+            }
             logInfo("Applied override for: " + emailLower);
         }
 
@@ -458,17 +482,17 @@ async function onNewMessageCompose(event) {
 
         //team override for groups in case different styling is needed
         if (employee.teamCode && config.teamOverrides) {
-            var override = config.teamOverrides[employee.teamCode.trim().toUpperCase()]; 
-            if (override) {
-                if (override.banner)     employee.banner = override.banner; //team-specific banner from config override
-                if (override.teamName) employee.teamName = override.teamName; //team-specific name from config override
+            var teamOverride = config.teamOverrides[employee.teamCode.trim().toUpperCase()];
+            if (teamOverride) {
+                if (teamOverride.banner)   employee.banner   = teamOverride.banner;   //team-specific banner from config override
+                if (teamOverride.teamName) employee.teamName = teamOverride.teamName; //team-specific name from config override
                 logInfo("Team override applied — code: " + employee.teamCode); //debugging
             }
         }
 
         logInfo("Matched config website: " + config.website);//Logs the matched config website to verify correct config is applied
 
-        // NEW: Apply config values as fallbacks
+        // Apply config values as fallbacks
         // Banner always comes from the Azure Function (based on email suffix in signature.js)
         // Website and address use the hotel config if not set on the employee
         employee.website = employee.website || config.website;
@@ -476,7 +500,6 @@ async function onNewMessageCompose(event) {
 
         logInfo("Config applied — website: " + employee.website);
 
-        // CHANGE: Now passes config as second argument for styling
         var signatureHtml = buildSignatureHtml(employee, config);
 
         if (bodyItem.setSignatureAsync) {
@@ -496,7 +519,8 @@ async function onNewMessageCompose(event) {
                 }
             );
         } else if (Office.context.mailbox.diagnostics.hostName !== "OutlookIOS") {
-            // Fallback for older desktop clients that don't support setSignatureAsync
+            // Fallback for older desktop clients (including Outlook Classic builds
+            // that don't expose setSignatureAsync yet) — prependAsync still works.
             logWarn("setSignatureAsync not supported — using prependAsync fallback");
             bodyItem.prependAsync(
                 signatureHtml,
@@ -518,13 +542,12 @@ async function onNewMessageCompose(event) {
             clearTimeout(safetyTimeout);
             event.completed();
         }
-
-    } catch (error) {
+    })["catch"](function (error) {
         clearTimeout(safetyTimeout);
-        logError("Error: " + error.message);
+        logError("Error: " + (error && error.message ? error.message : error));
         notifyUser("error", "Could not load signature. Check your connection.");
         event.completed();
-    }
+    });
 }
 
 // NO CHANGE — registers the event handler with Office
