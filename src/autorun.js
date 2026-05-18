@@ -1,4 +1,15 @@
-Office.onReady(function () {
+/* global Office, console */
+/*
+ * Connacht Hospitality Group — Outlook Signature Add-in
+ * autorun.js — Fetches employee data and sets the signature
+ *
+ * IMPORTANT: This file is intentionally NOT wrapped in Office.onReady(...).
+ * For event-based activation (LaunchEvent / OnNewMessageCompose), Microsoft
+ * requires Office.actions.associate to be called at the top level when the
+ * script is first parsed. Wrapping it in Office.onReady means the runtime
+ * fires the event before the handler is registered, and the add-in silently
+ * does nothing — which is exactly what happens on Outlook Classic on Windows.
+ */
 
 console.log("[ConnachtSig] JS Loaded", new Date().toISOString());
 //actual Function App URL from the Azure Portal.
@@ -294,7 +305,10 @@ function notifyUser(type, message) {
 function getConfigForEmail(email) {
     var emailLower = email.toLowerCase();
     for (var suffix in HOTEL_CONFIG) {
-        if (suffix !== "default" && emailLower.endsWith(suffix)) {
+        if (suffix === "default") continue;
+        // IE11/Trident lacks String.prototype.endsWith, so do the check manually.
+        var idx = emailLower.lastIndexOf(suffix);
+        if (idx !== -1 && idx === emailLower.length - suffix.length) {
             return HOTEL_CONFIG[suffix];
         }
     }
@@ -550,7 +564,8 @@ function onNewMessageCompose(event) {
     });
 }
 
-// NO CHANGE — registers the event handler with Office
+// Register the event handler with the Office runtime.
+// MUST be at the top level of this file (not inside Office.onReady) — see the
+// header comment. This is the line that makes the add-in actually fire on
+// Outlook Classic.
 Office.actions.associate("onNewMessageCompose", onNewMessageCompose);
-
-}); // end of Office.onReady()

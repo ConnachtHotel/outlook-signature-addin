@@ -4,7 +4,9 @@
   <meta charset="UTF-8" />
   <title>Connacht Signatures</title>
   <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
-  <script type="text/javascript" src="autorun.js"></script>
+  <!-- Cache-bust query string must be kept in sync with the ?v= values in manifest.xml
+       so Trident-mode Outlook Classic doesn't serve a cached copy of autorun.js. -->
+  <script type="text/javascript" src="autorun.js?v=1.0.4"></script>
 </head>
 <body>
 </body>
