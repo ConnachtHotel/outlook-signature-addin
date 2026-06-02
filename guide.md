@@ -1,8 +1,7 @@
 # Connacht Signatures Add-in — Maintainer's Guide
 
 A practical guide to maintaining, extending and debugging the
-`outlook-signature-addin` repository. Written for someone who has
-never touched an Outlook add-in before. Read at least sections 1, 2,
+`outlook-signature-addin` repository. Read at least sections 1, 2,
 3 and 8 before making changes.
 
 ---
