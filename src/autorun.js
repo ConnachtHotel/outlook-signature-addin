@@ -530,4 +530,4 @@ async function onNewMessageCompose(event) {
 // NO CHANGE — registers the event handler with Office
 Office.actions.associate("onNewMessageCompose", onNewMessageCompose);
 
-}); // end of Office.onReady() -> rollback to the 22nd of april with this commit, before the outlook classic attempt broke everything.
+}); // end of Office.onReady() -> rollback to the 22nd of april with this commit, before the outlook classic attempt broke everything. changed manifest version to 1.0.3.1 as of 02/06/26
