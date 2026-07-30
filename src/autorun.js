@@ -151,7 +151,13 @@ var HOTEL_CONFIG = {
         website: "www.galwayhooker.ie",
         address: "Galway City",
         websiteUrl: "https://www.galwayhooker.ie/",
-        teamOverrides: {}, // no sub-teams for this hotel
+        teamOverrides: {
+                     "YELLOW": { //the actual value from entra, its the faxNumber field on entra
+                banner: "https://ConnachtHotel.github.io/outlook-signature-addin/assets/GHLogo.png",
+                teamName: "GalwayHooker"
+            }
+            
+        }, // no sub-teams for this hotel
         style: {
             nameColor: "#000000",
             nameSize: "14px",
