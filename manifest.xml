@@ -5,7 +5,7 @@
            xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides/1.0"
            xsi:type="MailApp">
 <Id>dff50eba-eccd-49cb-b533-49817e2f07da</Id>
-<Version>1.0.4.0</Version>
+<Version>1.0.4.1</Version>
 <ProviderName>Connacht Hospitality Group</ProviderName>
 <DefaultLocale>en-US</DefaultLocale>
 <DisplayName DefaultValue="Connacht Signatures"/>
@@ -72,19 +72,7 @@
             </ExtensionPoint>
           </DesktopFormFactor>
           <!--End of desktop support-->
-
-          <!--Mobile support, mobile add ins are expected to only run for 60 secs max-->
-          <MobileFormFactor>
-          <FunctionFile resid="WebViewRuntime.Url"/>
-
-          <ExtensionPoint xsi:type="LaunchEvent">
-            <LaunchEvents>
-              <LaunchEvent Type="OnNewMessageCompose" FunctionName="onNewMessageCompose"/>
-            </LaunchEvents>
-            <SourceLocation resid="WebViewRuntime.Url"/>
-          </ExtensionPoint>
-        </MobileFormFactor>
-        <!--End of mobile support section-->
+          <!-- Mobile signatures are handled by the separate Connacht Signatures IOS add-in. -->
         </Host>
       </Hosts>
 
@@ -107,4 +95,3 @@
       </VersionOverrides>
   </VersionOverrides>
 </OfficeApp>
-<!-- ManifestVersion 1.0.1.0 is the latest working version as of 10/ 03/ 2026 all version past 1.0.3.0 threw errors in validation-->
