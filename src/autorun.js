@@ -1,5 +1,7 @@
 Office.onReady(function () {
 
+var SIGNATURE_VERSION = "1.2.0";
+
 console.log("[ConnachtSig] JS Loaded", new Date().toISOString());
 //actual Function App URL from the Azure Portal.
 var API_URL = "https://connachtsignatures-bsbfakbbcjf6fnbb.westeurope-01.azurewebsites.net/api/signature";
@@ -305,6 +307,41 @@ function getConfigForEmail(email) {
     return HOTEL_CONFIG["default"];
 }
 
+// Company-name matching is centralized in Azure. Ignore unsupported/incomplete
+// profiles as a whole so mixed client/server versions retain the old behavior.
+function getSignatureProfile(employee) {
+    var p = employee.signatureProfile;
+    return p && p.version === 1 && typeof p.key === "string" &&
+        Object.prototype.hasOwnProperty.call(HOTEL_CONFIG, p.key) &&
+        typeof p.phone === "string" && typeof p.banner === "string" &&
+        /^https:\/\/[^\s<>"'\\]+$/i.test(p.banner) ? p : null;
+}
+
+function prepareEmployee(raw) {
+    var employee = Object.assign({}, raw);
+    var profile = getSignatureProfile(employee);
+    if (profile) {
+        employee.banner = profile.banner;
+        employee.phone = profile.phone;
+    }
+    var emailLower = employee.email.toLowerCase();
+    if (EMAIL_OVERRIDES[emailLower]) Object.assign(employee, EMAIL_OVERRIDES[emailLower]);
+    var config = profile ? HOTEL_CONFIG[profile.key] : getConfigForEmail(employee.email);
+    if (employee.teamCode && config.teamOverrides) {
+        var code = employee.teamCode.trim().toUpperCase();
+        Object.keys(config.teamOverrides).some(function (key) {
+            if (key.toUpperCase() !== code) return false;
+            var override = config.teamOverrides[key];
+            if (override.banner) employee.banner = override.banner;
+            if (override.teamName) employee.teamName = override.teamName;
+            return true;
+        });
+    }
+    employee.website = employee.website || config.website;
+    employee.address = employee.address || config.address;
+    return { employee: employee, config: config };
+}
+
 // ── CHANGE 6: Completely rewritten getEmployeeData ───────
 // OLD: Fetched the entire JSON file, then looped through every employee to find a match.
 // NEW: Calls the Azure Function with just the email. The function calls Microsoft Graph,
@@ -315,7 +352,7 @@ async function getEmployeeData() {
     var userEmail = Office.context.mailbox.userProfile.emailAddress;
     logInfo("Current user email: " + userEmail);
 
-    var response = await fetch(API_URL + "?email=" + encodeURIComponent(userEmail));
+    var response = await fetch(API_URL + "?email=" + encodeURIComponent(userEmail) + "&client=desktop&version=" + SIGNATURE_VERSION);
 
     // 404 means the employee wasn't found in Azure AD
     if (response.status === 404) {
@@ -451,34 +488,11 @@ async function onNewMessageCompose(event) {
 
         logInfo("Employee found: " + employee.name);
 
-        // Apply per-email overrides (name, title, etc.)
-        var emailLower = employee.email.toLowerCase();
-        if (EMAIL_OVERRIDES[emailLower]) {
-            Object.assign(employee, EMAIL_OVERRIDES[emailLower]);
-            logInfo("Applied override for: " + emailLower);
-        }
-
-        logInfo("Looking up config for email: " + employee.email);//Logs the email being used to find the config
-
-        var config = getConfigForEmail(employee.email);
-
-        //team override for groups in case different styling is needed
-        if (employee.teamCode && config.teamOverrides) {
-            var override = config.teamOverrides[employee.teamCode.trim().toUpperCase()]; 
-            if (override) {
-                if (override.banner)     employee.banner = override.banner; //team-specific banner from config override
-                if (override.teamName) employee.teamName = override.teamName; //team-specific name from config override
-                logInfo("Team override applied — code: " + employee.teamCode); //debugging
-            }
-        }
-
-        logInfo("Matched config website: " + config.website);//Logs the matched config website to verify correct config is applied
-
-        // NEW: Apply config values as fallbacks
-        // Banner always comes from the Azure Function (based on email suffix in signature.js)
-        // Website and address use the hotel config if not set on the employee
-        employee.website = employee.website || config.website;
-        employee.address = employee.address || config.address;
+        var prepared = prepareEmployee(employee);
+        employee = prepared.employee;
+        var config = prepared.config;
+        var signatureProfile = getSignatureProfile(employee);
+        logInfo("Brand source: " + (signatureProfile ? signatureProfile.source + " -> " + signatureProfile.key : "legacy email"));
 
         logInfo("Config applied — website: " + employee.website);
 
