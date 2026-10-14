@@ -31,10 +31,17 @@ var HOTEL_CONFIG = {
                 banner: "https://ConnachtHotel.github.io/outlook-signature-addin/assets/newLogo.gif",
                 teamName: "Member of Green Tourism & Green Meetings"
             }
+             "HYDE": { //the actual value from entra, its the faxNumber field on entra
+                banner: "https://ConnachtHotel.github.io/outlook-signature-addin/assets/ hydeHotelLogo.jpg",
+                teamName: "Member of Green Tourism & Green Meetings"
+                website: "www.hydehote.ie",
+                address: "Forster Street, Galway",
+                websiteUrl: "https://www.hydehotel.ie/",
+            }
             //
             /*
             !!---to add another team/ group simply add in this format:---!!
-
+                hydeHotelLogo.jpg
             "value you want from faxNumber in entra": {
                 banner: "optional team-specific banner URL (falls back to employee banner or hotel default)",
                 teamName: "optional team name to display in signature (falls back to employee teamName or nothing)"
