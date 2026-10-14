@@ -32,9 +32,9 @@ var HOTEL_CONFIG = {
                 teamName: "Member of Green Tourism & Green Meetings"
             }
              "HYDE": { //the actual value from entra, its the faxNumber field on entra
-                banner: "https://ConnachtHotel.github.io/outlook-signature-addin/assets/ hydeHotelLogo.jpg",
+                banner: "https://ConnachtHotel.github.io/outlook-signature-addin/assets/hydeHotelLogo.jpg",
                 teamName: "--",
-                website: "www.hydehote.ie",
+                website: "www.hydehotel.ie",
                 address: "Forster Street, Galway",
                 websiteUrl: "https://www.hydehotel.ie/"
             }
